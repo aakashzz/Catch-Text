@@ -116,7 +116,7 @@ function Home() {
                      <Loader />
                   </div>
                ) : (
-                  <div className="mx-10 h-auto rounded-lg my-6 font-medium text-lg px-4">
+                  <div className="mx-7 h-auto rounded-lg my-6 font-medium text-medium sm:text-lg px-4">
                      {data}
                   </div>
                )}
