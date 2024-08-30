@@ -17,6 +17,9 @@
     font-size: 1em;
     transition: 400ms;
   }
+  .button .text{
+
+  }
   
   .button svg path {
     transition: 400ms;

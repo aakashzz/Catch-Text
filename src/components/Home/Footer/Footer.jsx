@@ -1,4 +1,5 @@
 import React from "react";
+import Logo from '../../../../public/logo-white.svg'
 
 function Footer() {
    return (
@@ -9,7 +10,7 @@ function Footer() {
                   <a href="#">
                      <div className="inline-flex items-center">
                         <img
-                           src="../../../../public/logo-white.svg"
+                           src={Logo}
                            alt=""
                            className="h-20"
                         />
@@ -19,38 +20,30 @@ function Footer() {
                      </div>
                   </a>
                </div>
-               <div className="w-auto p-8 text-white">
+               <div className="w-auto p-7  text-white">
                   <ul className="-m-5 flex flex-wrap items-center text-white">
                      <li className="p-5 text-white">
                         <a
                            className="font-medium text-gray-600 hover:text-gray-700"
-                           href="#"
+                           href="https://github.com/aakashzz"
                         >
-                           Privacy Policy
+                           GitHub-Page
                         </a>
                      </li>
                      <li className="p-5">
                         <a
                            className="font-medium text-gray-600 hover:text-gray-700"
-                           href="#"
+                           href="https://www.linkedin.com/in/aakash-malviya-5a9aaa257"
                         >
-                           Terms of Service
+                           LinkedIn
                         </a>
                      </li>
                      <li className="p-5">
                         <a
                            className="font-medium text-gray-600 hover:text-gray-700"
-                           href="#"
+                           href="https://www.instagram.com/aakashmalviya___"
                         >
-                           Return Policy
-                        </a>
-                     </li>
-                     <li className="p-5">
-                        <a
-                           className="font-medium text-gray-600 hover:text-gray-700"
-                           href="#"
-                        >
-                           Contact Us
+                           Instagram
                         </a>
                      </li>
                   </ul>

@@ -2,55 +2,63 @@ import React, { useRef, useState } from "react";
 import Header from "./Header/Header";
 import "./Home.css";
 import Footer from "./Footer/Footer";
-import { tesseractConvertor } from "../../lib/convertor";
+import Loader from "../Mini-components/Loader";
 import Tesseract from "tesseract.js";
 
 function Home() {
-   const [loading, setLoading] = useState();
-   const [data, setData] = useState();
+   const [loading, setLoading] = useState(false);
+   const [data, setData] = useState([]);
+   const [url, setUrl] = useState("");
    const imagePathSelector = useRef();
-
+   //image selector code
    function selectImage(e) {
       const filePath = e.target.files[0];
       if (!filePath) {
          throw console.error("Local File Path Not Here..");
       }
       const url = URL.createObjectURL(filePath);
-      console.log(url);
-      setData(url);
+      if (!url) {
+         throw console.error("Url Not Found !")
+      }
+      setUrl(url);
    }
-   async function getImage(e) {
-      try {
 
-         if (!data) {
-            throw console.error("Data Not Here")
+   //convertor code
+   async function getImage() {
+      try {
+         if (!url) {
+            throw console.error("Data Not Here");
          }
-         Tesseract.recognize(
-            data, // Path to the image file
-            'eng',                    // Language
+         setLoading(true);
+         await Tesseract.recognize(
+            url, // Path to the image file
+            "eng", // Language
             {
-                logger: info => console.log(info) // Optional: log progress
+               logger: (info) => {
+                  setLoading(true);
+               },
             }
-        ).then(({ data: { text } }) => {
-            console.log(text);
-        }).catch(error => {
-            console.error(error);
-        });
-        
-      } catch (error) {
-         console.log(error);
-      } finally {
-         setLoading(false);
+         )
+            .then(({ data: { text } }) => {
+               setLoading(false);
+               setData(text);
+            })
+            .catch((error) => {
+               throw console.error(error);
+            })
+            .finally(setLoading(false));
+      } catch {
+         throw console.error("Something While Wrong Network Issue..!");
       }
    }
 
    return (
       <>
          <Header />
-         <main className=" h-screen  text-white">
+         <main className=" h-full  text-white">
             {/* This main Heading to attract user */}
             <div className="text-center py-1 ">
-               <h2 id="heading" className=" pt-5">
+               <h2 id="heading" className=" pt-5 px-2 text-3xl sm:text-4xl md:text-5xl lg:text-[3em] font-bold">
                   Lets convert the document into text..
                </h2>
             </div>
@@ -101,6 +109,17 @@ function Home() {
                >
                   Convert
                </button>
+            </div>
+            <div className="h-auto w-full py-6   ">
+               {loading ? (
+                  <div className="h-fit w-full text-center  ">
+                     <Loader />
+                  </div>
+               ) : (
+                  <div className="mx-10 h-auto rounded-lg my-6 font-medium text-lg px-4">
+                     {data}
+                  </div>
+               )}
             </div>
          </main>
          <Footer />

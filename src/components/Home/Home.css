@@ -10,8 +10,6 @@ body,h2{
 }
 
 #heading{
-   font-size: 3rem;
-   font-weight: bold;
    background: linear-gradient(45deg, #0466c8, #de64d1, #4a90e2);
    -webkit-background-clip: text;
    -webkit-text-fill-color: transparent;
